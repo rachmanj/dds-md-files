@@ -617,8 +617,163 @@ src/app/
 - Modern browser support
 - HTTPS for production
 
+## Improvement Plan Implementation
+
+### **Approved Enhancement Features (Budget-Optimized for 2 VPS)**
+
+The following improvements have been planned for implementation to enhance the DDS Portal's functionality while maintaining cost-effectiveness:
+
+#### **Priority 1: Real-time Notifications System**
+
+- WebSocket-based real-time updates
+- In-app notification center
+- Distribution status change alerts
+- User presence indicators
+- Email notification integration
+
+#### **Priority 2: Enhanced Document Tracking & Location Management**
+
+- Comprehensive document location history
+- Visual tracking timeline
+- Location-based filtering and search
+- Movement audit trail
+- Department-wise document visibility
+
+#### **Priority 3: Advanced Analytics & Reporting Dashboard**
+
+- Weekly analytics collection
+- Key performance indicators (KPIs)
+- Department performance metrics
+- Processing time analysis
+- Customizable chart widgets
+
+#### **Priority 4: Multi-Factor Authentication (MFA)**
+
+- TOTP-based two-factor authentication
+- Recovery codes generation
+- Login attempt tracking
+- Enhanced security audit logs
+- Session management improvements
+
+#### **Priority 5: Advanced File Management & Watermarking**
+
+- Automatic watermark application
+- File processing queue system
+- Enhanced file preview capabilities
+- Watermarked file version tracking
+- Image optimization and compression
+
+#### **Priority 6: User Experience & Accessibility**
+
+- Dark mode implementation
+- Customizable dashboard widgets
+- User preference management
+- Responsive design improvements
+- Theme switching capabilities
+
+### **Technical Architecture (2 VPS Optimized)**
+
+#### **VPS 1: Application Server (2GB RAM, 2 CPU, 40GB)**
+
+- **Nginx**: 80MB RAM - SSL termination, static file serving, reverse proxy
+- **PHP-FPM**: 400MB RAM - Laravel 12.0 API, file processing, MFA & security
+- **Node.js/Next.js**: 800MB RAM - Frontend application, Socket.IO server, real-time notifications
+- **Redis**: 200MB RAM - Session storage, cache layer, queue management, real-time data
+- **System Reserve**: 500MB RAM
+
+#### **VPS 2: Database & Storage (2GB RAM, 2 CPU, 40GB)**
+
+- **MySQL 8.0**: 1.2GB RAM - Primary database with InnoDB buffer pool optimization
+- **File Storage**: Local directories for original, watermarked, thumbnails, and backups
+- **Nginx**: 100MB RAM - File serving and API proxy
+- **Backup Scripts**: 200MB RAM - Database backup, file backup, log rotation
+- **System Reserve**: 500MB RAM
+
+### **Database Enhancements**
+
+#### **New Tables Added**
+
+1. **notifications** - Real-time notification management
+2. **realtime_sessions** - WebSocket session tracking
+3. **document_locations** - Document location history
+4. **tracking_events** - Enhanced tracking events
+5. **weekly_analytics** - Performance analytics data
+6. **user_activities** - User activity tracking
+7. **user_two_factor_auth** - MFA implementation
+8. **login_attempts** - Security audit logging
+9. **file_watermarks** - Watermark tracking
+10. **file_processing_jobs** - File processing queue
+11. **user_preferences** - UI customization settings
+
+#### **Existing Table Modifications**
+
+- **users**: Added MFA fields, preferences, activity tracking
+- **distributions**: Added urgency levels, tracking numbers, workflow data
+- **distribution_documents**: Added verification methods, digital signatures
+- **invoice_attachments**: Added watermarking, processing status, access tracking
+
+### **Performance Optimizations**
+
+#### **Memory Management**
+
+- Compressed table storage (ROW_FORMAT=COMPRESSED)
+- Optimized MySQL configuration for 2GB RAM
+- Redis memory limits and LRU eviction policy
+- PHP-FPM process management tuning
+
+#### **Storage Optimization**
+
+- Weekly analytics instead of daily (space saving)
+- Compressed JSON fields for metadata storage
+- Efficient indexing strategy
+- Automated data cleanup and archival
+
+#### **Caching Strategy**
+
+- Redis-based caching for frequently accessed data
+- Dashboard metrics caching (1 hour TTL)
+- User session optimization
+- Query result caching for analytics
+
+### **Security Enhancements**
+
+#### **Authentication & Authorization**
+
+- Multi-factor authentication with TOTP
+- Enhanced session security
+- Login attempt monitoring and rate limiting
+- Recovery code generation and management
+
+#### **File Security**
+
+- Automatic watermarking for sensitive documents
+- File access logging and monitoring
+- Secure file serving with authentication
+- Virus scanning integration capability
+
+### **Cost Structure (Annual Budget)**
+
+#### **Infrastructure Costs**
+
+- VPS 1 (Application): $120-240/year
+- VPS 2 (Database): $120-240/year
+- Domain & SSL: $12/year (Let's Encrypt free)
+- **Total Annual**: $252-492
+
+#### **Development Timeline**
+
+- **Week 1-2**: Infrastructure setup + Real-time notifications
+- **Week 3**: Enhanced document tracking
+- **Week 4**: Analytics dashboard + widgets
+- **Week 5**: MFA security implementation
+- **Week 6**: File watermarking system
+- **Week 7**: Dark mode + customizable dashboard
+- **Week 8**: Testing, optimization, and deployment
+
 ## Conclusion
 
-The DDS Portal is a sophisticated, enterprise-grade document distribution system that combines modern web technologies with comprehensive business logic. It provides a complete solution for organizations needing structured document workflows with verification, tracking, and reporting capabilities. The system demonstrates best practices in both Laravel and Next.js development, with a focus on security, scalability, and user experience.
+The DDS Portal is a sophisticated, enterprise-grade document distribution system that combines modern web technologies with comprehensive business logic. With the planned improvements, it will provide enhanced real-time capabilities, advanced analytics, improved security, and better user experience while maintaining cost-effectiveness.
 
-The architecture supports future enhancements and can be extended to accommodate additional document types, workflow stages, or integration with external systems. The robust RBAC system ensures that the application can scale to support larger organizations with complex permission requirements.
+The optimized architecture ensures efficient operation on limited hardware resources (2GB RAM per VPS) while supporting up to 50 concurrent users. The phased implementation approach allows for gradual feature rollout with minimal disruption to existing operations.
+
+The enhanced system will demonstrate best practices in both Laravel and Next.js development, with a focus on security, performance optimization, and user experience. The robust RBAC system combined with MFA will ensure enterprise-grade security, while the real-time features and advanced analytics will significantly improve operational efficiency.
