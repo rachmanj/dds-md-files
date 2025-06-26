@@ -1,0 +1,23 @@
+{
+  "name": "dds-socket-server",
+  "version": "1.0.0",
+  "description": "Socket.IO server for DDS Portal real-time features",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js"
+  },
+  "dependencies": {
+    "socket.io": "^4.8.1",
+    "cors": "^2.8.5",
+    "axios": "^1.6.0",
+    "mysql2": "^3.6.0",
+    "dotenv": "^16.3.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.0"
+  },
+  "keywords": ["socket.io", "realtime", "notifications"],
+  "author": "DDS Team",
+  "license": "MIT"
+} 

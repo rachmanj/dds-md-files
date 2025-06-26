@@ -1,0 +1,12 @@
+# Socket.IO Server Configuration
+SOCKET_PORT=3002
+
+# Database Configuration (should match your Laravel .env)
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=dds_be
+DB_USERNAME=root
+DB_PASSWORD=
+
+# Environment
+NODE_ENV=development 
